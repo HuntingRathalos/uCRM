@@ -10,7 +10,7 @@ class InertiaTestController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Inertia/index');
+        return Inertia::render('Inertia/Index');
     }
 
     public function show(string $id)
