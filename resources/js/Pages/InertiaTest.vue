@@ -8,7 +8,9 @@ const newContent = ref("");
     testです。
     <a href="/">aaa</a>
     <Link href="/">link</Link><br />
-    <Link :href="route('inertia.index')">名前付きルート</Link>
+    <Link :href="route('inertia.index')">名前付きルート</Link><br />
+    <Link :href="route('inertia.show', { id: 1 })">ルートパラメータテスト</Link
+    ><br />
 
     <div class="mb-8"></div>
     <input type="text" name="newTitle" v-model="newTitle" />
