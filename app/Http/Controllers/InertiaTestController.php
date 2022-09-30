@@ -44,7 +44,18 @@ class InertiaTestController extends Controller
         return Inertia::render('Inertia/Show',
         [
             'id' => $id,
-            'blog' => InertiaTest::findOrFail($id);
+            'blog' => InertiaTest::findOrFail($id)
+        ]);
+    }
+
+    public function delete(string $id)
+    {
+        $blog = InertiaTest::findOrFail($id);
+        $blog->delete();
+
+        return to_route('inertia.index')
+        ->with([
+            'message' => '削除しました。'
         ]);
     }
 }
