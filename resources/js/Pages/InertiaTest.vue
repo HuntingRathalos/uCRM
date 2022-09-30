@@ -20,6 +20,6 @@ const newContent = ref("");
         method="post"
         :href="route('inertia.store')"
         :data="{ title: newTitle, content: newContent }"
-        >DB保存テスト</Link
+        >DB</Link
     >
 </template>

@@ -20,13 +20,6 @@ class InertiaTestController extends Controller
         return Inertia::render('Inertia/Create');
     }
 
-    public function show(string $id)
-    {
-        return Inertia::render('Inertia/Show',
-        [
-            'id' => $id
-        ]);
-    }
 
     public function store(Request $request)
     {
@@ -43,6 +36,15 @@ class InertiaTestController extends Controller
         return to_route('inertia.index')
         ->with([
             'message' => '登録しました。'
+        ]);
+    }
+
+    public function show(string $id)
+    {
+        return Inertia::render('Inertia/Show',
+        [
+            'id' => $id,
+            'blog' => InertiaTest::findOrFail($id);
         ]);
     }
 }
