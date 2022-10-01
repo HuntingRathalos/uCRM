@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\InertiaTestController;
+use App\Http\Controllers\ItemController;
 
 
 /*
@@ -28,6 +29,8 @@ Route::get('inertia/create', [InertiaTestController::class, "create"])->name('in
 Route::post('inertia', [InertiaTestController::class, "store"])->name('inertia.store');
 Route::get('inertia/show/{id}', [InertiaTestController::class, "show"])->name('inertia.show');
 Route::delete('inertia/{id}', [InertiaTestController::class, "delete"])->name('inertia.delete');
+
+Route::get('items', [ItemController::class, "index"])->name('items.index');
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
