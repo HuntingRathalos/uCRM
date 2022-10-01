@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/inertia-vue3";
 defineProps({
     items: Array,
 });
@@ -25,11 +25,12 @@ defineProps({
                                 <div
                                     class="flex pl-4 my-4 lg:w-2/3 w-full mx-auto"
                                 >
-                                    <button
+                                    <Link
+                                        as="button"
                                         class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                                        :href="route('items.create')"
+                                        >商品登録</Link
                                     >
-                                        Button
-                                    </button>
                                 </div>
                                 <div
                                     class="lg:w-2/3 w-full mx-auto overflow-auto"
