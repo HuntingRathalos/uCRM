@@ -67,7 +67,18 @@ defineProps({
                                         <tbody>
                                             <tr v-for="item in items">
                                                 <td class="px-4 py-3">
-                                                    {{ item.id }}
+                                                    <Link
+                                                        class="text-blue-400"
+                                                        :href="
+                                                            route(
+                                                                'items.show',
+                                                                {
+                                                                    item: item.id,
+                                                                }
+                                                            )
+                                                        "
+                                                        >{{ item.id }}
+                                                    </Link>
                                                 </td>
                                                 <td class="px-4 py-3">
                                                     {{ item.name }}
@@ -76,7 +87,20 @@ defineProps({
                                                     {{ item.price }}
                                                 </td>
                                                 <td class="px-4 py-3">
-                                                    {{ item.is_selling }}
+                                                    <span
+                                                        v-if="
+                                                            item.is_selling ===
+                                                            1
+                                                        "
+                                                        >販売中</span
+                                                    >
+                                                    <span
+                                                        v-if="
+                                                            item.is_selling ===
+                                                            0
+                                                        "
+                                                        >停止中</span
+                                                    >
                                                 </td>
                                             </tr>
                                         </tbody>
