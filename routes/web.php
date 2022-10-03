@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\InertiaTestController;
+use App\Http\Controllers\ItemController;
 
 
 /*
@@ -16,6 +17,7 @@ use App\Http\Controllers\InertiaTestController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::resource('items', ItemController::class)->middleware(['auth', 'verified']);
 
 Route::get('inertia-test', function () {
     return Inertia::render('InertiaTest');
@@ -28,6 +30,11 @@ Route::get('inertia/create', [InertiaTestController::class, "create"])->name('in
 Route::post('inertia', [InertiaTestController::class, "store"])->name('inertia.store');
 Route::get('inertia/show/{id}', [InertiaTestController::class, "show"])->name('inertia.show');
 Route::delete('inertia/{id}', [InertiaTestController::class, "delete"])->name('inertia.delete');
+
+// Route::get('items', [ItemController::class, "index"])->name('items.index');
+// Route::post('items', [ItemController::class, "store"])->name('items.store');
+// Route::get('items/create', [ItemController::class, "create"])->name('items.create');
+// Route::get('items/show/{id}', [ItemController::class, "show"])->name('items.show');
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
