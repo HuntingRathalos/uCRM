@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('customer_id')->constrained()-
+            >onUpdate('cascade');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
