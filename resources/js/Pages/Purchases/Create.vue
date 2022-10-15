@@ -1,11 +1,19 @@
 <script setup>
 import { getToday } from "@/common";
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref, computed } from "vue";
 
 const props = defineProps({ customers: Array, items: Array });
 
 const itemList = ref([]);
 const quantity = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+const totalPrice = computed(() => {
+    let total = 0;
+    itemList.value.forEach((item) => {
+        total += item.price * item.quantity;
+    });
+    return total;
+});
 
 onMounted(() => {
     form.date = getToday();
@@ -64,4 +72,5 @@ const form = reactive({ customer_id: null, date: null });
             </tr>
         </tbody>
     </table>
+    合計 {{ totalPrice }}円
 </template>
