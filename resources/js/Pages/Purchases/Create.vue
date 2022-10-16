@@ -33,8 +33,8 @@ const storePurchase = () => {
         if (item.quantity > 0) {
             form.items.push({ id: item.id, quantity: item.quantity });
         }
-        Inertia.post(route("purchases.store"), form);
     });
+    Inertia.post(route("purchases.store"), form);
 };
 const form = reactive({
     customer_id: null,

@@ -45,7 +45,18 @@ class PurchaseController extends Controller
      */
     public function store(StorePurchaseRequest $request)
     {
-        //
+        $purchase = Purchase::create([
+            'customer_id' => $request->customer_id,
+            'status' => $request->status,
+        ]);
+
+        foreach($request->items as $item) {
+            $purchase->items()->attach($purchase->id,[
+                'item_id' => $item['id'],
+                'quantity' => $item['quantity']
+            ]);
+        }
+        return to_route('dashboard');
     }
 
     /**
