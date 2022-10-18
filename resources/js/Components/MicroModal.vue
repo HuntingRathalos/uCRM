@@ -1,9 +1,15 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import axios from "axios";
 const isShow = ref(false);
 const toggleStatus = () => {
     isShow.value = !isShow.value;
 };
+onMounted(() => {
+    axios.get("/api/user").then((res) => {
+        console.log(res);
+    });
+});
 </script>
 <template>
     <div v-show="isShow" class="modal" id="modal-1" aria-hidden="true">
