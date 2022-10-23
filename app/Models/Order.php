@@ -12,6 +12,6 @@ class Order extends Model
 
     protected static function booted()
     {
-        static::addGlobalScope();
+        static::addGlobalScope(new Subtotal);
     }
 }
