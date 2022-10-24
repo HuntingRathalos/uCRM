@@ -27,7 +27,7 @@ class PurchaseController extends Controller
         ->paginate(50);
 
         return Inertia::render('Purchases/Index', [
-        'orders' = $orders
+        'orders' => $orders
         ]);
     }
 
