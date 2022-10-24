@@ -93,7 +93,7 @@ class PurchaseController extends Controller
         sum(subtotal) as total, status, created_at' )
         ->get();
 
-        return Inertia::render('Purchase/Show', [
+        return Inertia::render('Purchases/Show', [
             'items' => $items,
             'order' => $order,
         ]);
