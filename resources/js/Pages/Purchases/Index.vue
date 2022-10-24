@@ -5,6 +5,8 @@ import FlashMessage from "@/Components/FlashMessage.vue";
 import Pagination from "@/Components/Pagination.vue";
 import { ref, onMounted } from "vue";
 import { Inertia } from "@inertiajs/inertia";
+import dayjs from "dayjs";
+
 const props = defineProps({ orders: Object });
 </script>
 <template>
@@ -94,7 +96,13 @@ const props = defineProps({ orders: Object });
                                                     {{ order.status }}
                                                 </td>
                                                 <td class="px-4 py-3">
-                                                    {{ order.created_at }}
+                                                    {{
+                                                        dayjs(
+                                                            order.created_at
+                                                        ).format(
+                                                            "YYYY-MM-DD HH:mm:ss"
+                                                        )
+                                                    }}
                                                 </td>
                                             </tr>
                                         </tbody>
