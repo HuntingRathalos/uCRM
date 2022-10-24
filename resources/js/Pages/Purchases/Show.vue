@@ -114,7 +114,7 @@ onMounted(() => {});
                                                     </thead>
                                                     <tbody>
                                                         <tr
-                                                            v-for="item in itemList"
+                                                            v-for="item in props.items"
                                                         >
                                                             <td
                                                                 class="px-4 py-3"
@@ -124,38 +124,29 @@ onMounted(() => {});
                                                             <td
                                                                 class="px-4 py-3"
                                                             >
-                                                                {{ item.name }}
-                                                            </td>
-                                                            <td
-                                                                class="px-4 py-3"
-                                                            >
-                                                                {{ item.price }}
-                                                            </td>
-                                                            <td
-                                                                class="px-4 py-3"
-                                                            >
-                                                                <select
-                                                                    name="quantity"
-                                                                    v-model="
-                                                                        item.quantity
-                                                                    "
-                                                                >
-                                                                    <option
-                                                                        v-for="q in quantity"
-                                                                        :value="
-                                                                            q
-                                                                        "
-                                                                    >
-                                                                        {{ q }}
-                                                                    </option>
-                                                                </select>
+                                                                {{
+                                                                    item.item_name
+                                                                }}
                                                             </td>
                                                             <td
                                                                 class="px-4 py-3"
                                                             >
                                                                 {{
-                                                                    item.price *
+                                                                    item.item_price
+                                                                }}
+                                                            </td>
+                                                            <td
+                                                                class="px-4 py-3"
+                                                            >
+                                                                {{
                                                                     item.quantity
+                                                                }}
+                                                            </td>
+                                                            <td
+                                                                class="px-4 py-3"
+                                                            >
+                                                                {{
+                                                                    item.subtotal
                                                                 }}
                                                             </td>
                                                         </tr>
