@@ -84,7 +84,19 @@ const props = defineProps({ orders: Object });
                                                     .data"
                                             >
                                                 <td class="px-4 py-3">
-                                                    {{ order.id }}
+                                                    <Link
+                                                        class="text-blue-400"
+                                                        :href="
+                                                            route(
+                                                                'purchases.show',
+                                                                {
+                                                                    purchase:
+                                                                        order.id,
+                                                                }
+                                                            )
+                                                        "
+                                                        >{{ order.id }}
+                                                    </Link>
                                                 </td>
                                                 <td class="px-4 py-3">
                                                     {{ order.customer_name }}
