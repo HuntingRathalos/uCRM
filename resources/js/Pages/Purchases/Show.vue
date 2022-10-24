@@ -119,7 +119,9 @@ onMounted(() => {});
                                                             <td
                                                                 class="px-4 py-3"
                                                             >
-                                                                {{ item.id }}
+                                                                {{
+                                                                    item.item_id
+                                                                }}
                                                             </td>
                                                             <td
                                                                 class="px-4 py-3"
