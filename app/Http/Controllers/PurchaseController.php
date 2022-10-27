@@ -125,6 +125,17 @@ class PurchaseController extends Controller
                 'quantity' => $quantity
             ]);
         }
+
+        $order = Order::groupBy('id')
+        ->where('id', $purchase->id)
+        ->selectRaw('id, customer_id,
+        customer_name, status, created_at' )
+        ->get();
+
+        return Inertia::render('Purchase/Edit', [
+            'items' => $items,
+            'order' => $order,
+        ]);
     }
 
     /**
