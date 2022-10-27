@@ -132,7 +132,7 @@ class PurchaseController extends Controller
         customer_name, status, created_at' )
         ->get();
 
-        return Inertia::render('Purchase/Edit', [
+        return Inertia::render('Purchases/Edit', [
             'items' => $items,
             'order' => $order,
         ]);
