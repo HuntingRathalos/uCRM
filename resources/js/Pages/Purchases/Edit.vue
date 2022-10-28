@@ -236,7 +236,7 @@ const quantity = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
                                                 <button
                                                     class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
                                                 >
-                                                    登録する
+                                                    更新する
                                                 </button>
                                             </div>
                                         </div>
