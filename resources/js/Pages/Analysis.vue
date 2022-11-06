@@ -27,6 +27,8 @@ const getData = async () => {
             })
             .then((res) => {
                 data.data = res.data.data;
+                data.labels = res.data.labels;
+                data.totals = res.data.totals;
                 // console.log(res.data);
             });
     } catch (e) {
@@ -69,7 +71,9 @@ const getData = async () => {
                             </button>
                         </form>
 
-                        <Chart />
+                        <div v-show="data.data">
+                            <Chart :data="data" />
+                        </div>
 
                         <div
                             v-show="data.data"
