@@ -21,17 +21,30 @@ class AnalysisController extends Controller
         // ->paginate(50);
 
         // 日別
-        $subQuery = Order::betweenDate($startDate, $endDate)
-        ->where('status', true)->groupBy('id')
-        ->selectRaw('id, SUM(subtotal) as totalPerPurchase,
-        DATE_FORMAT(created_at, "%Y%m%d") as date');
+        // $subQuery = Order::betweenDate($startDate, $endDate)
+        // ->where('status', true)->groupBy('id')
+        // ->selectRaw('id, SUM(subtotal) as totalPerPurchase,
+        // DATE_FORMAT(created_at, "%Y%m%d") as date');
 
-        $data = DB::table($subQuery)
-        ->groupBy('date')
-        ->selectRaw('date, sum(totalPerPurchase) as total')
-        ->get();
+        // $data = DB::table($subQuery)
+        // ->groupBy('date')
+        // ->selectRaw('date, sum(totalPerPurchase) as total')
+        // ->get();
 
         // dd($data);
+
+        // 1. 購買ID毎にまとめる
+        $subQuery = Order::betweenDate($startDate, $endDate)
+        ->groupBy('id')
+        ->selectRaw('id, customer_id, customer_name, SUM(subtotal) as
+        totalPerPurchase');
+
+        // 2. 会員毎にまとめて購入金額順にソートする
+        $subQuery = DB::table($subQuery)
+        ->groupBy('customer_id')
+        ->selectRaw('customer_id, customer_name, sum(totalPerPurchase)
+        as total')
+        ->orderBy('total', 'desc');
 
         return Inertia::render('Analysis');
     }
