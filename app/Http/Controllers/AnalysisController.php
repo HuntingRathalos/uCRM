@@ -57,6 +57,21 @@ class AnalysisController extends Controller
         customer_name,
         total');
 
+        // 4. 全体の件数を数え、1/10の値や合計金額を取得
+        $count = DB::table($subQuery)->count();
+        $total = DB::table($subQuery)->selectRaw('sum(total) as total')->get();
+        $total = $total[0]->total;
+        $decile = ceil($count / 10);
+
+        $bindValues = [];
+        $tempValue = 0;
+        for($i = 1; $i <= 10; $i++)
+        {
+        array_push($bindValues, 1 + $tempValue);
+        $tempValue += $decile;
+        array_push($bindValues, 1 + $tempValue);
+        }
+
         return Inertia::render('Analysis');
     }
 }
