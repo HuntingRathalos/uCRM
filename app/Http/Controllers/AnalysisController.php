@@ -101,6 +101,20 @@ class AnalysisController extends Controller
         round(avg(total)) as average,
         sum(total) as totalPerGroup');
 
+        // 構成比を出すために変数を使う
+        // 7 構成比
+        DB::statement("set @total = ${total} ;");
+        $data = DB::table($subQuery)
+        ->selectRaw('decile,
+        average,
+        totalPerGroup,
+        round(100 * totalPerGroup / @total, 1) as
+        totalRatio
+        ')
+        ->get();
+
+        dd($data);
+
         return Inertia::render('Analysis');
     }
 }
