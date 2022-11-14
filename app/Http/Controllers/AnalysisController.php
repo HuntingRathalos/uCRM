@@ -94,6 +94,13 @@ class AnalysisController extends Controller
             end as decile
             ", $bindValues); // SelectRaw第二引数にバインドしたい数値(配列)をいれる
 
+        // 6. グループ毎の合計・平均
+        $subQuery = DB::table($subQuery)
+        ->groupBy('decile')
+        ->selectRaw('decile,
+        round(avg(total)) as average,
+        sum(total) as totalPerGroup');
+
         return Inertia::render('Analysis');
     }
 }
