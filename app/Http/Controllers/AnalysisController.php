@@ -11,6 +11,10 @@ class AnalysisController extends Controller
 {
     public function index()
     {
+        return Inertia::render('Analysis');
+    }
+    public function decile()
+    {
         $startDate = '2022-08-01';
         $endDate = '2022-08-31';
 
@@ -95,7 +99,5 @@ class AnalysisController extends Controller
         ->get();
 
         dd($data);
-
-        return Inertia::render('Analysis');
     }
 }
