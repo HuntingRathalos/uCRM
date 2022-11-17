@@ -17,6 +17,8 @@ class Subtotal implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
+        // １つの購入履歴における複数の商品ごとの価格がsubtotal
+        // そのため、この後にidでグループ化すると１回の購入での料金がわかる
         $sql = 'select purchases.id as id
         , items.id as item_id
         , item_purchase.id as pivot_id
