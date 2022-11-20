@@ -98,6 +98,6 @@ class AnalysisController extends Controller
         ')
         ->get();
 
-        dd($data);
+        // dd($data);
     }
 }
