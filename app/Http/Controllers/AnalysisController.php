@@ -11,6 +11,14 @@ class AnalysisController extends Controller
 {
     public function index()
     {
+        // RFM分析
+        // 1. 購買ID毎にまとめる
+        $subQuery = Order::betweenDate($startDate, $endDate)
+        ->groupBy('id')
+        ->selectRaw('id, customer_id,
+        customer_name, SUM(subtotal) as
+        totalPerPurchase, created_at');
+
         return Inertia::render('Analysis');
     }
     public function decile()
