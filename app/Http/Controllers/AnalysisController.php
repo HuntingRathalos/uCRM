@@ -29,6 +29,29 @@ class AnalysisController extends Controller
         count(customer_id) as frequency,
         sum(totalPerPurchase) as monetary');
 
+        // 4. 会員毎のRFMランクを計算
+        $subQuery = DB::table($subQuery)
+        ->selectRaw('customer_id, customer_name,
+        recentDate, recency, frequency, monetary,
+        case
+        when recency < 14 then 5
+        when recency < 28 then 4
+        when recency < 60 then 3
+        when recency < 90 then 2
+        else 1 end as r,
+        case
+        when 7 <= frequency then 5
+        when 5 <= frequency then 4
+        when 3 <= frequency then 3
+        when 2 <= frequency then 2
+        else 1 end as f,
+        case
+        when 300000 <= monetary then 5
+        when 200000 <= monetary then 4
+        when 100000 <= monetary then 3
+        when 30000 <= monetary then 2
+        else 1 end as m');
+
         return Inertia::render('Analysis');
     }
     public function decile()
