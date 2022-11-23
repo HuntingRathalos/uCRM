@@ -52,6 +52,24 @@ class AnalysisController extends Controller
         when 30000 <= monetary then 2
         else 1 end as m');
 
+        // 5.ランク毎の数を計算する
+        $total = DB::table($subQuery)->count();
+        $rCount = DB::table($subQuery)
+        ->groupBy('r')
+        ->selectRaw('r, count(r)')
+        ->orderBy('r', 'desc')
+        ->get();
+        $fCount = DB::table($subQuery)
+        ->groupBy('f')
+        ->selectRaw('f, count(f)')
+        ->orderBy('f', 'desc')
+        ->get();
+        $mCount = DB::table($subQuery)
+        ->groupBy('m')
+        ->selectRaw('m, count(m)')
+        ->orderBy('m', 'desc')
+        ->get();
+
         return Inertia::render('Analysis');
     }
     public function decile()
