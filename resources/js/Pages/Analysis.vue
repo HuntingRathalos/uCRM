@@ -5,7 +5,6 @@ import { reactive, onMounted } from "vue";
 import { getToday } from "@/common";
 import Chart from "@/Components/Chart.vue";
 import ResultTable from "@/Components/ResultTable.vue";
-import ResultTable from "../Components/ResultTable.vue";
 
 onMounted(() => {
     form.startDate = getToday();
@@ -15,7 +14,7 @@ const form = reactive({
     startDate: null,
     endDate: null,
     type: "perDay",
-    rfmPrms: [14, 28, 60, 90, 7, 5, 3, 2, 300000, 200000, 100000, 30000],
+    rfmPrms: [120, 150, 200, 300, 5, 4, 3, 2, 100000, 70000, 50000, 30000],
 });
 const data = reactive({});
 const getData = async () => {
@@ -80,8 +79,8 @@ const getData = async () => {
                             /><span class="mr-2">デシル分析</span>
                             <input
                                 type="radio"
-                                v-model="form.rfm"
-                                value="decile"
+                                v-model="form.type"
+                                value="rfm"
                             /><span class="mr-2">RFM分析</span>
                             From:
                             <input
