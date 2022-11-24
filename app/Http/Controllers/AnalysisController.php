@@ -62,17 +62,30 @@ class AnalysisController extends Controller
         ->groupBy('r')
         ->selectRaw('r, count(r)')
         ->orderBy('r', 'desc')
-        ->get();
+        ->pluck('count(r)');
         $fCount = DB::table($subQuery)
         ->groupBy('f')
         ->selectRaw('f, count(f)')
         ->orderBy('f', 'desc')
-        ->get();
+        ->pluck('count(f)');
         $mCount = DB::table($subQuery)
         ->groupBy('m')
         ->selectRaw('m, count(m)')
         ->orderBy('m', 'desc')
-        ->get();
+        ->pluck('count(m)');
+
+        $eachCount = []; // Vue側に渡すようの空の配列
+        $rank = 5; // 初期値5
+        for($i = 0; $i < 5; $i++)
+        {
+        array_push($eachCount, [
+            'rank' => $rank,
+            'r' => $rCount[$i],
+            'f' => $fCount[$i],
+            'm' => $mCount[$i],
+            ]);
+            $rank--; // rankを1ずつ減らす
+        }
 
         // concatで文字列結合
         // 6. RとFで2次元で表示してみる
