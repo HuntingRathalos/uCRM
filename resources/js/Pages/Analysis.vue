@@ -25,6 +25,7 @@ const getData = async () => {
                     startDate: form.startDate,
                     endDate: form.endDate,
                     type: form.type,
+                    rfmPrms: form.rfmPrms,
                 },
             })
             .then((res) => {
