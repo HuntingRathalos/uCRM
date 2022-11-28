@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
         $items = Item::all();
 
-        Purchase::factory(1000)->create()
+        Purchase::factory(10000)->create()
         ->each(function(Purchase $purchase) use ($items){
             $purchase->items()->attach(
             $items->random(rand(1,3))->pluck('id')->toArray(),
