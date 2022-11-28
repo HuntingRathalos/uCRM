@@ -87,4 +87,50 @@ const props = defineProps({
             </tbody>
         </table>
     </div>
+    <div
+        v-if="data.type === 'rfm'"
+        class="lg:w-2/3 w-full mx-auto overflow-auto"
+    >
+        {{ data.totals }}
+        <table class="mx-auto">
+            <thead>
+                <tr>
+                    <th>ランク</th>
+                    <th>R (○日以内)</th>
+                    <th>F (○回以上)</th>
+                    <th>M (○円以上)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="rfm in data.eachCount" :key="rfm.rank">
+                    <td>{{ rfm.rank }}</td>
+                    <td>{{ rfm.r }}</td>
+                    <td>{{ rfm.f }}</td>
+                    <td>{{ rfm.m }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="mx-auto">
+            <thead>
+                <tr>
+                    <th>rRank</th>
+                    <th>f_5</th>
+                    <th>f_4</th>
+                    <th>f_3</th>
+                    <th>f_2</th>
+                    <th>f_1</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="rf in data.data" :key="rf.rRank">
+                    <td>{{ rf.rRank }}</td>
+                    <td>{{ rf.f_5 }}</td>
+                    <td>{{ rf.f_4 }}</td>
+                    <td>{{ rf.f_3 }}</td>
+                    <td>{{ rf.f_2 }}</td>
+                    <td>{{ rf.f_1 }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
