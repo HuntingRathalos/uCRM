@@ -30,11 +30,11 @@ class AnalysisController extends Controller
         }
         if($request->type === 'decile')
         {
-            list($data, $labels, $totals) = AnalysisService::decile($subQuery);
+            list($data, $labels, $totals) = DecileService::decile($subQuery);
         }
         if($request->type === 'rfm')
         {
-            list($data, $totals, $eachCount) = RFMService::decile($subQuery, $request->rfmRrms);
+            list($data, $totals, $eachCount) = RFMService::rfm($subQuery, $request->rfmPrms);
 
             return response()->json([
                 'data' => $data,
@@ -42,6 +42,7 @@ class AnalysisController extends Controller
                 'eachCount' => $eachCount,
                 'totals' => $totals,
             ],
+            Response::HTTP_OK);
         }
 
 
