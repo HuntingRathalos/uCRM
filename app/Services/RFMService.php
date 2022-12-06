@@ -25,10 +25,6 @@ class RFMService
     count(customer_id) as frequency,
     sum(totalPerPurchase) as monetary');
 
-    // 4. 会員毎のRFMランクを計算(フロントから渡す)
-    // $rfmPrms = [
-    //     120, 150, 200, 300, 5, 4, 3, 2, 100000, 70000, 50000, 30000
-    // ];
 
     $subQuery = DB::table($subQuery)
     ->selectRaw('customer_id, customer_name,
@@ -51,7 +47,6 @@ class RFMService
     when ? <= monetary then 3
     when ? <= monetary then 2
     else 1 end as m', $rfmPrms);
-    // dd($subQuery);
 
     // 5.ランク毎の数を計算する
     $totals = DB::table($subQuery)->count();
@@ -76,8 +71,6 @@ class RFMService
     ->selectRaw('rank as m, count(m)')
     ->orderBy('m', 'desc')
     ->pluck('count(m)');
-
-    // dd($rCount, $fCount, $mCount);
 
     $eachCount = []; // Vue側に渡すようの空の配列
     $rank = 5; // 初期値5
