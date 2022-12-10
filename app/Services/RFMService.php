@@ -25,10 +25,6 @@ class RFMService
     count(customer_id) as frequency,
     sum(totalPerPurchase) as monetary');
 
-    // 4. 会員毎のRFMランクを計算(フロントから渡す)
-    // $rfmPrms = [
-    //     120, 150, 200, 300, 5, 4, 3, 2, 100000, 70000, 50000, 30000
-    // ];
 
     $subQuery = DB::table($subQuery)
     ->selectRaw('customer_id, customer_name,
@@ -51,30 +47,30 @@ class RFMService
     when ? <= monetary then 3
     when ? <= monetary then 2
     else 1 end as m', $rfmPrms);
-    // dd($subQuery);
 
     // 5.ランク毎の数を計算する
     $totals = DB::table($subQuery)->count();
 
     $rCount = DB::table($subQuery)
-    ->groupBy('r')
-    ->selectRaw('r, count(r)')
+    ->rightJoin('ranks', 'ranks.rank', '=', 'r')
+    ->groupBy('rank')
+    ->selectRaw('rank as r, count(r)')
     ->orderBy('r', 'desc')
     ->pluck('count(r)');
 
     $fCount = DB::table($subQuery)
-    ->groupBy('f')
-    ->selectRaw('f, count(f)')
+    ->rightJoin('ranks', 'ranks.rank', '=', 'f')
+    ->groupBy('rank')
+    ->selectRaw('rank as f, count(f)')
     ->orderBy('f', 'desc')
     ->pluck('count(f)');
 
     $mCount = DB::table($subQuery)
-    ->groupBy('m')
-    ->selectRaw('m, count(m)')
+    ->rightJoin('ranks', 'ranks.rank', '=', 'm')
+    ->groupBy('rank')
+    ->selectRaw('rank as m, count(m)')
     ->orderBy('m', 'desc')
     ->pluck('count(m)');
-
-    // dd($rCount, $fCount, $mCount);
 
     $eachCount = []; // Vue側に渡すようの空の配列
     $rank = 5; // 初期値5
@@ -92,7 +88,8 @@ class RFMService
     // concatで文字列結合
     // 6. RとFで2次元で表示してみる
     $data = DB::table($subQuery)
-    ->groupBy('r')
+    ->rightJoin('ranks', 'ranks.rank', '=', 'r')
+    ->groupBy('rank')
     ->selectRaw('concat("r_", r) as rRank,
     count(case when f = 5 then 1 end ) as f_5,
     count(case when f = 4 then 1 end ) as f_4,
